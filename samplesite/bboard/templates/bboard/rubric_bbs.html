@@ -1,0 +1,23 @@
+{% extends "layout/basic.html" %}
+{% block title %}{{ current_rubric.name }}{% endblock %}
+{% block content %}
+
+<h2>Рубрика: {{ current_rubric.name }}</h2>
+{% for bb in bbs %}
+<div>
+    <h2>{{ bb.title }}</h2>
+    <p>{{ bb.content }}</p>
+    <p>
+                {% if bb.stickers.all %}
+                    <strong>Метки:</strong>
+                    {% for sticker in bb.stickers.all %}
+                        <span style="background-color: #eee; padding: 2px 5px; margin-right: 5px; border-radius: 3px;">
+                            {{ sticker.name }}
+                        </span>
+                    {% endfor %}
+                {% endif %}
+    </p>
+    <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
+</div>
+{% endfor %}
+{% endblock %}
